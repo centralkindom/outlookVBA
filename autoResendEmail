@@ -1,0 +1,690 @@
+
+Option Base 1
+Private mysuj, mysender, attaname
+Dim attaCount As Integer
+Private tempStr As String
+Private mycnt22 As Integer
+
+ '定义动态数组存储附件名称
+
+Sub autoforwardmichen(item As Outlook.MailItem)
+
+      attaname = ""
+      Dim ifcontain
+      
+    
+    Dim myattachment
+        mysuj = item.Subject '得到邮件题目
+                          
+        mysender = item.SenderEmailAddress '过滤发件人用
+        
+      Rem 得到抄送
+             
+        Dim myRecipients As Outlook.Recipients
+        
+        Set myRecipients = item.Recipients
+       
+        
+      Dim n333
+      For n333 = 1 To myRecipients.Count
+        Select Case myRecipients(n333).Type
+       
+          Case Is = olCC
+                       
+              strCCAddress = myRecipients(n333).Address & "; "
+          
+          
+        End Select
+      Next n333
+     Rem MsgBox strCCAddress
+        
+        Rem 得到抄送
+      
+    
+      
+      
+        
+        Dim n2 As Integer
+        n2 = 0
+        Dim myattArray()
+For Each myattachment In item.Attachments
+ If myattachment.Size > 0 Then
+           Rem 新添加
+         If myattachment.FileName Like "*.jpg" Or myattachment.FileName Like "*.png" Or myattachment.FileName Like "*.gif" Then
+      
+         Else
+      
+           Rem 新添加
+                        
+ 
+      
+    
+      
+             
+                  n2 = n2 + 1
+                  ReDim Preserve myattArray(1 To n2)
+                  myattArray(n2) = myattachment.FileName
+      
+                  attaname = attaname & "<<" & myattachment.FileName & ">> " 'attaname 得到了所有附件名称
+                  
+               
+         End If
+  End If
+Next myattachment 'attaname 包含了所有附件的名称过滤字符用
+attaCount = 0
+If n2 = 0 Then
+attaCount = 0
+Else
+attaCount = n2
+End If
+       
+       If attaname = "" Or Len(attaname) = 0 Or Len(attaname) < 0 Then
+Exit Sub
+Else
+
+      Dim attaubound
+      attaubound = UBound(myattArray, 1) '得到了附件数组的上线附件数组完成
+         
+          
+'以下是把附件缩减为只有语言代码的数组
+
+Dim mi55
+Dim dedupbase()
+
+Dim xx
+nn4 = 0 '定义一次不可动
+For xx = 1 To UBound(myattArray)
+If InStr(1, UCase(myattArray(xx)), "EN", vbBinaryCompare) > 0 Then
+nn4 = nn4 + 1
+ReDim Preserve dedupbase(1 To nn4)
+dedupbase(nn4) = "EN"
+Exit For
+End If
+Next xx
+
+
+For xx2 = 1 To UBound(myattArray)
+If InStr(1, UCase(myattArray(xx2)), "RU", vbBinaryCompare) > 0 Then
+nn4 = nn4 + 1
+ReDim Preserve dedupbase(1 To nn4)
+dedupbase(nn4) = "RU"
+Exit For
+End If
+Next xx2
+
+
+For xx3 = 1 To UBound(myattArray)
+If InStr(1, UCase(myattArray(xx3)), "IT", vbBinaryCompare) > 0 Then
+nn4 = nn4 + 1
+ReDim Preserve dedupbase(1 To nn4)
+dedupbase(nn4) = "IT"
+Exit For
+End If
+Next xx3
+
+
+For xx4 = 1 To UBound(myattArray)
+If InStr(1, UCase(myattArray(xx4)), "FR", vbBinaryCompare) > 0 Then
+nn4 = nn4 + 1
+ReDim Preserve dedupbase(1 To nn4)
+dedupbase(nn4) = "FR"
+Exit For
+End If
+Next xx4
+
+
+For xx5 = 1 To UBound(myattArray)
+If InStr(1, UCase(myattArray(xx5)), "DE", vbBinaryCompare) > 0 Then
+nn4 = nn4 + 1
+ReDim Preserve dedupbase(1 To nn4)
+dedupbase(nn4) = "DE"
+Exit For
+End If
+Next xx5
+
+
+For xx6 = 1 To UBound(myattArray)
+If InStr(1, UCase(myattArray(xx6)), "JP", vbBinaryCompare) > 0 Then
+nn4 = nn4 + 1
+ReDim Preserve dedupbase(1 To nn4)
+dedupbase(nn4) = "JP"
+Exit For
+End If
+Next xx6
+
+For xx7 = 1 To UBound(myattArray)
+If InStr(1, UCase(myattArray(xx7)), "ES", vbBinaryCompare) > 0 Then
+nn4 = nn4 + 1
+ReDim Preserve dedupbase(1 To nn4)
+dedupbase(nn4) = "ES"
+Exit For
+End If
+Next xx7
+ 
+For xx8 = 1 To UBound(myattArray)
+If InStr(1, UCase(myattArray(xx8)), "PO", vbBinaryCompare) > 0 Then
+nn4 = nn4 + 1
+ReDim Preserve dedupbase(1 To nn4)
+dedupbase(nn4) = "PO"
+Exit For
+End If
+Next xx8
+     
+   
+For xx9 = 1 To UBound(myattArray)
+If InStr(1, UCase(myattArray(xx9)), "KO", vbBinaryCompare) > 0 Then
+nn4 = nn4 + 1
+ReDim Preserve dedupbase(1 To nn4)
+dedupbase(nn4) = "KO"
+Exit For
+End If
+Next xx9
+
+For xx10 = 1 To UBound(myattArray)
+If InStr(1, UCase(myattArray(xx10)), "KE", vbBinaryCompare) > 0 Then
+nn4 = nn4 + 1
+ReDim Preserve dedupbase(1 To nn4)
+dedupbase(nn4) = "KE"
+Exit For
+End If
+Next xx10
+
+
+
+For xx11 = 1 To UBound(myattArray)
+If InStr(1, UCase(myattArray(xx11)), "BR", vbBinaryCompare) > 0 Then
+nn4 = nn4 + 1
+ReDim Preserve dedupbase(1 To nn4)
+dedupbase(nn4) = "BR"
+Exit For
+End If
+Next xx11
+
+For xx12 = 1 To UBound(myattArray)
+If InStr(1, UCase(myattArray(xx12)), "PT", vbBinaryCompare) > 0 Then
+nn4 = nn4 + 1
+ReDim Preserve dedupbase(1 To nn4)
+dedupbase(nn4) = "PT"
+Exit For
+End If
+Next xx12
+
+
+Dim checkifright As String
+checkifright = Join(dedupbase, ",")
+If Len(checkifright) > 0 Then
+
+
+
+     
+ '以上是结束
+ 
+ '以下创建一个字典把语言和对应的校验人员电子邮件地址写入
+Dim d As Object
+Dim mi33()
+Dim nx
+
+Dim x12
+
+
+   Set d = CreateObject("Scripting.Dictionary")
+   d.Add "EN", "pig.zng@aia.us; luy5@aina.com"
+   d.Add "RU", "eow@aina.com; mowtiketing@aiin.com"
+   d.Add "IT", "mancala@aihina.com"
+   d.Add "FR", "huagng@arcom"
+   d.Add "ES", "ma2@aihna.es"
+   d.Add "PO", "jry@airina.com.br"
+   d.Add "KO", "aichayxt@naer.com"
+   d.Add "KE", "aihayxt@navr.com"
+   d.Add "PT", "jery@aiia.com.br"
+   d.Add "BR", "jery@ara.com.br"
+   nx = 0
+   For x12 = 1 To UBound(dedupbase, 1) Step 1
+      
+   If d.Exists(UCase(dedupbase(x12))) Then
+      nx = nx + 1
+      ReDim Preserve mi33(1 To nx)
+      mi33(nx) = d(UCase(dedupbase(x12)))
+          
+   End If
+   Next x12
+   
+   'mi33() 里面有邮件地址可以发送了
+    
+ 
+ 
+ '以上结束
+ 
+ 
+ 
+ 
+ 
+'已经不用了以下检测附件是否包含EN'
+    
+    
+Dim mi2 As Integer
+
+Dim mi3 As Integer
+Dim mi4 As String
+Dim mi5 As Integer
+
+
+mi3 = Len(mysuj)
+
+mi2 = InStr(1, mysuj, "<ID", vbBinaryCompare)
+mi5 = InStr(1, mysuj, ">", vbBinaryCompare)
+If Len(mi2) > 0 And Len(mi5) > 0 Then
+
+mi4 = Mid(mysuj, Int(mi2) + 3, (Int(mi5) - Int(mi2)) - 3)
+Else
+MsgBox "ID被破坏，需要手工转发校验"
+Exit Sub
+
+End If
+
+
+Dim myFwd As Outlook.MailItem
+   Set myFwd = item.Forward
+   
+    Dim myattachments As Outlook.Attachments
+   
+    
+       
+        Set myattachments = myFwd.Attachments
+        
+        
+        Dim n As Integer
+        Dim nn As Integer
+        
+
+ 
+             
+        
+         
+         
+       Dim mich, mich2, mich4, dimaddfile
+
+
+Dim xlsfile, ar(), nnn%
+On Error GoTo 105:
+xlsfile = Dir("D:\工作总结\20160429翻译工作接管\" & mi4 & "\*.*")
+
+Do Until Len(xlsfile) = 0
+    
+        nnn = nnn + 1
+        ReDim Preserve ar(1 To nnn)
+        ar(nnn) = xlsfile
+        xlsfile = Dir
+   
+Loop
+
+
+
+mich4 = UBound(ar, 1)
+
+Dim mmc()
+n = 0
+For mich = 1 To mich4 Step 1
+
+
+    mich2 = InStr(1, UCase(ar(mich)), "CN", vbBinaryCompare)
+    
+    If mich2 > 0 Then
+    n = n + 1
+    
+    ReDim Preserve mmc(1 To n)
+    
+    mmc(n) = ar(mich)
+       
+     
+    End If
+    
+Next mich
+
+
+Dim mich9, micha, mx2, n1
+Dim mmca()
+
+Rem 自动加载英语稿子开始
+For micha = 1 To mich4 Step 1
+
+
+    mich9 = InStr(1, UCase(ar(micha)), "EN", vbBinaryCompare)
+    
+    If mich9 > 0 Then
+   
+    n1 = n1 + 1
+    
+    ReDim Preserve mmca(1 To n1)
+    
+    mmca(n1) = ar(micha)
+       
+     
+    End If
+    
+Next micha
+
+
+Rem 自动加载英语稿子结束
+
+
+         
+      ' mi33(nx)
+      
+        
+        tempStr = Join(mi33, ",")
+        If Len(tempStr) > 0 Then
+        
+        Dim xyz
+        For xyz = 1 To UBound(mi33, 1)
+        
+        myFwd.Recipients.Add mi33(xyz)
+        
+        Call 校验发送奖金计算(mi33(xyz))
+       Rem If InStr(1, mi33(xyz), "ping.zhang", vbBinaryCompare) > 0 Then
+       Rem myFwd.Recipients.Add "lucywang2015@airchina.com"
+       Rem End If
+        If Len(strCCAddress) > 0 Then
+        myFwd.CC = "lixiao2016@airchina.com" & ";" & strCCAddress
+               
+        
+        
+        Rem myFwd.Recipients.Add strCCAddress
+        End If
+                
+        Next xyz
+        
+        
+        
+       
+        myFwd.Subject = "New verify work_" & item.Subject
+        myFwd.Body = "Dear:All" & Chr(10) & "Here comes the New verification work please help check translaton house's work." & Chr(10) & "== Convention:Because the VBA code will aoto archive your work,as a result the Subject(SubjectID) could never be changed, and if the attachment is OK, then just no attach it when replaying all this mail,and if the attachment(s) need to make improvement,then just attach the improved attachment(s)then replying all this mail. === " & Chr(10) & "Best Regards" & Chr(10) & "Air China E-commerce Overseas Sites" & Chr(10) & "Michen" & Chr(10) & DateTime.Now & Chr(10) & Chr(10) & Chr(10) & item.Body
+        
+        Rem 抄送开始
+        Rem myFwd.CC = item.CC
+       Rem  Dim RecipientTo As Object
+        
+      Rem   Set RecipientTo = myFwd.Recipients.Add("nanhuang@airchina.com")
+      Rem   RecipientTo.Type = olTo
+      Rem   myFwd.Recipients.Add RecipientTo
+                
+        Rem 抄送结束
+        
+        
+        MsgBox "是否自动发送EN英语或多语言校验，系统将自动加中文稿"
+        Dim mx
+        
+         Dim mxcheck1
+        mxcheck1 = Join(mmc, ",")
+         If Len(mxcheck1) > 0 Then
+        
+        
+       For mx = 1 To UBound(mmc, 1)
+            
+                         myFwd.Attachments.Add ("D:\工作总结\20160429翻译工作接管\" & mi4 & "\" & mmc(mx))
+       
+          
+           
+         
+        Next mx
+        End If
+        
+        Rem 判断是否需要加载英语稿子
+        Dim ifaden As Integer
+            ifaden = InStr(1, UCase(attaname), "EN", vbBinaryCompare)
+         If ifaden < 0 Or ifaden = 0 Or ifaden = Null Then
+        
+        Dim michencheck
+        michencheck = Join(mmca, ",")
+         If Len(michencheck) > 0 Then
+        For mx2 = 1 To UBound(mmca, 1)
+      
+             
+             
+             myFwd.Attachments.Add ("D:\工作总结\20160429翻译工作接管\" & mi4 & "\" & mmca(mx2))
+                
+             
+         
+        Next mx2
+        End If
+        End If
+        
+     
+        myFwd.Display
+     Rem    myFwd.Send
+         
+        
+        
+        
+        自动写发英语校验log
+        
+        Set item = Nothing
+        Set myFwd = Nothing
+        Set myattachment = Nothing
+        attaname = ""
+        mysuj = ""
+       
+       tempStr = ""
+       
+        End If
+Else
+
+End If
+mycnt22 = 0
+Exit Sub
+105:
+MsgBox "存盘失败，需要手工存盘"
+Exit Sub
+
+End If
+mycnt22 = 0
+End Sub
+
+
+
+Sub 自动写发英语校验log()
+
+
+
+
+
+
+Dim mi2 As Integer
+
+Dim mi3 As Integer
+Dim mi4 As String
+Dim mi5 As Integer
+
+
+mi3 = Len(mysuj)
+
+
+
+mi2 = InStr(1, mysuj, "<ID", vbBinaryCompare)
+mi5 = InStr(1, mysuj, ">", vbBinaryCompare)
+mi4 = Mid(mysuj, Int(mi2) + 3, (Int(mi5) - Int(mi2)) - 3)
+
+
+
+
+Dim mi222 As Integer
+
+Dim mi333 As Integer
+Dim mi444 As String
+Dim mi555 As Integer
+Dim mi666 As Integer
+Dim mi777 As Integer
+
+Dim mi888 As String
+
+
+mi333 = Len(mysuj)
+
+mi222 = InStr(1, mysuj, "<ID", vbBinaryCompare)
+mi555 = InStr(1, mysuj, ">", vbBinaryCompare)
+mi444 = Mid(mysuj, Int(mi222) + 3, (Int(mi555) - Int(mi222)) - 3)
+mi666 = InStr(10, mi444, "_", vbBinaryCompare)
+mi777 = InStr(mi666 + 1, mi444, "_", vbBinaryCompare)
+
+
+
+
+
+
+
+mi888 = Mid(mi444, mi666 + 1, (mi777 - mi666) - 1)
+
+Open "D:\工作总结\20160429翻译工作接管\" & mi4 & "\log.txt" For Append As #9
+
+Write #9, mi888, "校验已经自动发送", mysender, tempStr, attaname, Now()
+
+
+
+Close #9
+   
+
+
+End Sub
+
+
+Sub 校验发送奖金计算(rpt)
+
+Dim mi2 As Integer
+
+Dim mi3 As Integer
+Dim mi4 As String
+Dim mi5 As Integer
+
+
+mi3 = Len(mysuj)
+
+
+
+mi2 = InStr(1, mysuj, "<ID", vbBinaryCompare)
+mi5 = InStr(1, mysuj, ">", vbBinaryCompare)
+mi4 = Mid(mysuj, Int(mi2) + 3, (Int(mi5) - Int(mi2)) - 3)
+
+
+
+
+Dim mi222 As Integer
+
+Dim mi333 As Integer
+Dim mi444 As String
+Dim mi555 As Integer
+Dim mi666 As Integer
+Dim mi777 As Integer
+
+Dim mi888 As String
+
+
+mi333 = Len(mysuj)
+
+mi222 = InStr(1, mysuj, "<ID", vbBinaryCompare)
+mi555 = InStr(1, mysuj, ">", vbBinaryCompare)
+mi444 = Mid(mysuj, Int(mi222) + 3, (Int(mi555) - Int(mi222)) - 3)
+mi666 = InStr(10, mi444, "_", vbBinaryCompare)
+mi777 = InStr(mi666 + 1, mi444, "_", vbBinaryCompare)
+
+
+
+mi888 = Mid(mi444, mi666 + 1, (mi777 - mi666) - 1)
+
+Open "D:\工作总结\20160429翻译工作接管\" & mi4 & "\SendMailBonusLog.txt" For Append As #9
+
+Write #9, mi888, "校验已经自动发送", rpt, mysender, attaname, attaCount, Now()
+
+Close #9
+   
+Open "D:\工作总结\20160429翻译工作接管\境外奖金计算\SendMailBonusLog.txt" For Append As #79
+
+Write #79, mi888, "校验已经自动发送", rpt, "发送奖励计算", mysender, attaname, attaCount, Now()
+
+
+Close #79
+
+
+发送数据写入EXCEL mi888, "校验已经自动发送", rpt, "发送奖励计算", mysender, attaname, attaCount, Now()
+mycnt22 = mycnt22 + 1
+End Sub
+
+Rem
+Rem mi888, "校验已经自动发送", rpt, "发送奖励计算", mysender, attaname, attaCount, Now()
+
+Sub 发送数据写入EXCEL(a, b, c, d, e, f, g, h)
+Set Conn = CreateObject("adodb.connection")
+Set rst = CreateObject("ADODB.recordset")
+Conn.Open "Provider=Microsoft.ACE.OLEDB.12.0;extended properties=Excel 12.0;data source=" & "D:\工作总结\20160429翻译工作接管\境外奖金计算" & "/奖励计算数据库.xls"
+rst.Open "select *  from [发出$]", Conn, , adLockOptimistic
+rst.addnew
+rst.fields("日期") = CDate(Format(Now(), yyyy - mm - dd))
+rst.fields("项目名称") = Mid(a, 1, 200)
+rst.fields("动作") = b
+rst.fields("校验发送收件人") = Mid(c, 1, 200)
+rst.fields("奖励标识") = d
+rst.fields("发件人") = Mid(e, 1, 200)
+rst.fields("所有语言附件名称") = Mid(f, 1, 200)
+rst.fields("所有语言附件数") = CInt(g)
+rst.fields("时间戳") = h
+rst.fields("邮件数") = CInt(1)
+
+
+rst.Update
+rst.Close
+Conn.Close
+Set rst = Nothing
+Set Conn = Nothing
+
+If (mycnt22 <= 2) Then
+MsgBox "已输入到数据库"
+End If
+End Sub
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Function test()
+  
+        Rem 得到抄送
+        Dim myRecipients As Outlook.Recipients
+        
+        Set myRecipients = item.Recipients
+      intToCount = 0
+      intCCCount = 0
+       
+      For n333 = 1 To myRecipients.Count
+        Select Case myRecipients(n333).Type
+         Rem Case Is = olTo
+         Rem   intToCount = intToCount + 1
+         Rem   If intToCount > 1 Then
+         Rem     strToAddress = strToAddress & "; "
+         Rem   End If
+         Rem   strToAddress = strToAddress & ExchangeUser(myRecipients(n).Address, 1)
+          Case Is = olCC
+            intCCCount = intCCCount + 1
+            If intCCCount > 1 Then
+              strCCAddress = strCCAddress & "; "
+            End If
+           Rem strCCAddress = strCCAddress & ExchangeUser(myRecipients(n).Address, 1)
+        End Select
+      Next n333
+
+        
+        Rem 得到抄送
+End Function
+
+
+
+
