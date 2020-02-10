@@ -398,7 +398,7 @@ Rem 自动加载英语稿子结束
         
        
         myFwd.Subject = "New verify work_" & item.Subject
-        myFwd.Body = "Dear:All" & Chr(10) & "Here comes the New verification work please help check translaton house's work." & Chr(10) & "== Convention:Because the VBA code will aoto archive your work,as a result the Subject(SubjectID) could never be changed, and if the attachment is OK, then just no attach it when replaying all this mail,and if the attachment(s) need to make improvement,then just attach the improved attachment(s)then replying all this mail. === " & Chr(10) & "Best Regards" & Chr(10) & "Air China E-commerce Overseas Sites" & Chr(10) & "Michen" & Chr(10) & DateTime.Now & Chr(10) & Chr(10) & Chr(10) & item.Body
+        myFwd.Body = "Dear:All" & Chr(10) & "Here comes the New verification work please help check translaton house's work." & Chr(10) & "== Convention:Because the VBA code will aoto archive your work,as a result the Subject(SubjectID) could never be changed, and if the attachment is OK, then just no attach it when replaying all this mail,and if the attachment(s) need to make improvement,then just attach the improved attachment(s)then replying all this mail. === " & Chr(10) & "Best Regards" & Chr(10) & " E-commerce Overseas Sites" & Chr(10) & "Mich" & Chr(10) & DateTime.Now & Chr(10) & Chr(10) & Chr(10) & item.Body
         
         Rem 抄送开始
         Rem myFwd.CC = item.CC
