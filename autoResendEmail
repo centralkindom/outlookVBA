@@ -382,10 +382,10 @@ Rem 自动加载英语稿子结束
         
         Call 校验发送奖金计算(mi33(xyz))
        Rem If InStr(1, mi33(xyz), "ping.zhang", vbBinaryCompare) > 0 Then
-       Rem myFwd.Recipients.Add "lucywang2015@airchina.com"
+       Rem myFwd.Recipients.Add "lucyng2015@aia.com"
        Rem End If
         If Len(strCCAddress) > 0 Then
-        myFwd.CC = "lixiao2016@airchina.com" & ";" & strCCAddress
+        myFwd.CC = "lixi016@aina.com" & ";" & strCCAddress
                
         
         
@@ -404,9 +404,10 @@ Rem 自动加载英语稿子结束
         Rem myFwd.CC = item.CC
        Rem  Dim RecipientTo As Object
         
-      Rem   Set RecipientTo = myFwd.Recipients.Add("nanhuang@airchina.com")
+      Rem   Set RecipientTo = myFwd.Recipients.Add("naang@aina.com")
       Rem   RecipientTo.Type = olTo
       Rem   myFwd.Recipients.Add RecipientTo
+      
                 
         Rem 抄送结束
         
